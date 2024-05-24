@@ -1,0 +1,23 @@
+.logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px; /* Ajusta el tamaño de la imagen según sea necesario */
+    margin-right: 20px; /* Ajusta el margen entre la imagen y el texto */
+  }
+  
+  .button-icon {
+    vertical-align: middle; /* Centrar verticalmente los iconos */
+    margin-right: 8px; /* Ajusta el margen entre el icono y el texto del botón */
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .music-button, .search-button, .mail-button {
+    margin-right: 50px; /* Ajusta el espacio entre los botones */
+    color: lightseagreen;
+  }

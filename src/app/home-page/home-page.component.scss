@@ -1,0 +1,54 @@
+/* Estilos globales para centrar el contenido */
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilos para el contenedor */
+  .container {
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    flex-direction: column; /* Establece la disposición en columna */
+
+    background-position: center; /* Centra la imagen de fondo */
+    text-align: center; /* Alinea el contenido al centro */
+  }
+  
+  /* Estilos para el logo */
+  .logo {
+    width: 300px;
+    height: 300px; /* Ajusta el tamaño según tus necesidades */
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  /* Keyframes para la animación de flotación */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Estilos para el botón */
+  .btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efecto hover para el botón */
+  .btn:hover {
+    transform: scale(1.1);
+  }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
