@@ -1,41 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SpotifyService } from '../Core/spotify.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { SpotifyAuthService } from '../Core/spotify.auth.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-search-page',
-  imports: [ToolbarComponent, HttpClientModule],
+  selector: 'app-search',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss'],
-  standalone: true,
-  providers: [SpotifyAuthService]
+  imports: [ToolbarComponent],
+  standalone: true
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent {
+  artistas: any[] = [];
+  loading?: boolean;
 
-  constructor(private spotifyAuthService: SpotifyAuthService) { }
+  constructor(private spotify: SpotifyService) { }
 
-  ngOnInit(): void {
-    // Obtener el token de autorización
-    console.log('Obteniendo token de autorización...');
-    this.spotifyAuthService.getToken().subscribe(
-      (tokenResponse) => {
-        console.log('Token de autorización obtenido:', tokenResponse);
-
-        // Ahora que tenemos el token, podemos solicitar las canciones principales
-        console.log('Obteniendo las canciones principales...');
-        this.spotifyAuthService.getTopTracks().subscribe(
-          (tracksResponse) => {
-            console.log('Canciones principales obtenidas:', tracksResponse);
-          },
-          (tracksError) => {
-            console.error('Error al obtener las canciones principales:', tracksError);
-          }
-        );
-      },
-      (tokenError) => {
-        console.error('Error al obtener el token de autorización:', tokenError);
-      }
-    );
+  buscar(termino: string) {
+    this.loading = true;
+    this.spotify.getArtistas(termino)
+      .subscribe((data: any) => {
+        console.log(data);
+        this.artistas = data;
+        this.loading = false;
+      });
   }
 }

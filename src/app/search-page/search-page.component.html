@@ -1,2 +1,13 @@
 <app-toolbar></app-toolbar>
-<H1>SEARCH PAGE</H1>
+<h1>SEARCH PAGE</h1>
+<div class="container">
+    <div class="row my-5">
+        <div class="col-12">
+            <div class="input-group margin-bottom-sm">
+                <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Busca un artista">
+
+            </div>
+
+        </div>
+    </div>
+</div>

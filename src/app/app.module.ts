@@ -1,17 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { ToolbarComponent } from './toolbar/toolbar.component';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { ROUTES } from './app.routes';
+import { HttpClientModule } from '@angular/common/http';
+import { SpotifyService } from './Core/spotify.service';
+import { AuthGuardService } from './Core/auth-guard.service';
+import { SearchPageComponent } from './search-page/search-page.component';
+import { AccessTokenComponent } from './access-token/access-token.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatIcon } from '@angular/material/icon';
+
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    AccessTokenComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HomePageComponent,
+    SearchPageComponent,
+    ToolbarComponent,
+    HttpClientModule,
+    MatToolbar,
+    MatIcon,
+    RouterModule.forRoot(ROUTES, {useHash: true})
+   
+  ],
+  providers: [
+    SpotifyService, AuthGuardService
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
