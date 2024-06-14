@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
@@ -13,15 +13,18 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
+import { IonicModule } from '@ionic/angular';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccessTokenComponent,
+    
   ],
   imports: [
     BrowserModule,
+    IonicModule.forRoot(),
+    BrowserAnimationsModule,
     HomePageComponent,
     SearchPageComponent,
     ToolbarComponent,
