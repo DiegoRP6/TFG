@@ -14,25 +14,34 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
-
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { TarjetasComponent } from './tarjetas/tarjetas.component';
+import { LoadingComponent } from './shared/loading/loading.component';
+import { ArtistaComponent } from './artista/artista.component';
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+    TarjetasComponent,
+    NavbarComponent,
+    HomePageComponent,
+    SearchPageComponent,
+    LoadingComponent,
+    NoimagePipe,
+    DomseguroPipe,
+    ArtistaComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     BrowserAnimationsModule,
-    HomePageComponent,
-    SearchPageComponent,
     ToolbarComponent,
     HttpClientModule,
     MatToolbar,
     MatIcon,
     RouterModule.forRoot(ROUTES, {useHash: true})
-   
   ],
   providers: [
     SpotifyService, AuthGuardService

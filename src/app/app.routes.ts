@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 
 
 export const ROUTES: Routes = [
-  { path: "home", component: HomePageComponent},
+  { path: "home", component: HomePageComponent, canActivate: [AuthGuardService] },
   { path: "search", component: SearchPageComponent},
   { path: "access-token", component: AccessTokenComponent},
   { path: "main", component: MainComponent},

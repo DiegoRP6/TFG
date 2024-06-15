@@ -1,5 +1,4 @@
 <app-toolbar></app-toolbar>
-<h1>SEARCH PAGE</h1>
 <div class="container">
     <div class="row my-5">
         <div class="col-12">
@@ -10,4 +9,6 @@
 
         </div>
     </div>
+    <app-loading *ngIf="loading"></app-loading>
+    <app-tarjetas *ngIf="!loading" [items]="artistas"></app-tarjetas>
 </div>
