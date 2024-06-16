@@ -40,8 +40,8 @@ import { MainComponent } from './main/main.component';
     BrowserModule,
     IonicModule.forRoot(),
     BrowserAnimationsModule,
-    MatToolbarModule, // Importa el módulo de la barra de herramientas
-    MatIconModule, // Importa el módulo de iconos
+    MatToolbarModule, 
+    MatIconModule, 
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
