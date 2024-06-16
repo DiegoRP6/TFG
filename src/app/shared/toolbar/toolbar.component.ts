@@ -10,13 +10,21 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
 
+  activeIcon: string = '';
+
   constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  onMusicClick() {
+  onHomeClick() {
+    this.activeIcon = 'home'
     this.router.navigate(['/home']);
     console.log('Music button clicked');
+  }
+
+  onMainClick(){
+    this.router.navigate(['/main']);
+    console.log('Main button clicked');
   }
 
   onSearchClick() {
@@ -27,5 +35,20 @@ export class ToolbarComponent implements OnInit {
   onMailClick() {
     this.router.navigate(['/contact']);
     console.log('Mail button clicked');
+  }
+
+  onSearchArtistsClick() {
+    this.router.navigate(['/search/artists']);
+    console.log('Search Artists button clicked');
+  }
+
+  onSearchAlbumsClick() {
+    this.router.navigate(['/search/albums']);
+    console.log('Search Albums button clicked');
+  }
+
+  onSearchSongsClick() {
+    this.router.navigate(['/search/songs']);
+    console.log('Search Songs button clicked');
   }
 }

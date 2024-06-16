@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SpotifyService } from '../Core/spotify.service';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { ToolbarComponent } from '../shared/toolbar/toolbar.component';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 

@@ -10,11 +10,10 @@ import { AuthGuardService } from './Core/auth-guard.service';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { AccessTokenComponent } from './access-token/access-token.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ArtistaComponent } from './artista/artista.component';
@@ -26,7 +25,6 @@ import { MainComponent } from './main/main.component';
   declarations: [
     AppComponent,
     TarjetasComponent,
-    NavbarComponent,
     HomePageComponent,
     SearchPageComponent,
     LoadingComponent,
