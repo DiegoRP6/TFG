@@ -9,13 +9,15 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 /* You can add global styles to this file, and also import other style files */
-
-body {
+html, body {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     background-color: black;
     color: white !important;
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Previene el scroll horizontal no deseado */
+    overflow-y: auto;   /* Asegura que solo haya una barra de desplazamiento vertical */
 }
 
 hr {

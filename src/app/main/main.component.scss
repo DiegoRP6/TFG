@@ -1,0 +1,11 @@
+.card-container-new-releases {
+    position: relative;
+    z-index: 2;
+}
+
+:host {
+    display: block;
+    width: 100%;
+    height: 100%; 
+    background-image: url('../../assets/wallpapers/wallpaper3.jpg');
+}

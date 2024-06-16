@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,8 +11,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { AccessTokenComponent } from './access-token/access-token.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MatIcon } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
@@ -40,16 +40,17 @@ import { MainComponent } from './main/main.component';
     BrowserModule,
     IonicModule.forRoot(),
     BrowserAnimationsModule,
-    MatToolbar,
-    MatIcon,
+    MatToolbarModule, // Importa el módulo de la barra de herramientas
+    MatIconModule, // Importa el módulo de iconos
     HttpClientModule,
-    RouterModule.forRoot(ROUTES, {useHash: true})
+    RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [
-    SpotifyService, AuthGuardService
+    SpotifyService, 
+    AuthGuardService
   ],
   exports: [
-    ToolbarComponent  // Añade esto para exportar ToolbarComponent
+    ToolbarComponent  
   ],
   bootstrap: [AppComponent]
 })
