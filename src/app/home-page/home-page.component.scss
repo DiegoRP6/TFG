@@ -1,54 +1,68 @@
-/* Estilos globales para centrar el contenido */
-:host {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Estilos para el contenedor */
-  .container {
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
-    flex-direction: column; /* Establece la disposición en columna */
+.hero-banner {
+  width: 100%;
+  height: 95vh;
+}
 
-    background-position: center; /* Centra la imagen de fondo */
-    text-align: center; /* Alinea el contenido al centro */
+.wrapper {
+  position: absolute;
+  width: 100vw;
+}
+
+.gradient-black {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  min-width: 100%;
+  height: calc(100vh - 80px);
+
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-message {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+      font-size: 3em;
+      text-transform: uppercase;
+      span {
+          font-size: 3.5em;
+          color: #1DB954;
+          font-weight: 700;
+      }
   }
-  
-  /* Estilos para el logo */
-  .logo {
-    width: 300px;
-    height: 300px; /* Ajusta el tamaño según tus necesidades */
-    animation: float 3s ease-in-out infinite;
+}
+
+#hero-banner-video {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-container-new-releases {
+  position: relative;
+  z-index: 2;
+}
+
+.imageButton {
+  margin-top: 4%;
+  height: 30%;
+  transition: transform 0.3s ease; /* Añade una transición suave */
+  animation: pulse 2s infinite; /* Añade una animación continua */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1); /* Tamaño normal */
   }
-  
-  /* Keyframes para la animación de flotación */
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
+  50% {
+    transform: scale(1.1); /* Agranda la imagen */
   }
-  
-  /* Estilos para el botón */
-  .btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Efecto hover para el botón */
-  .btn:hover {
-    transform: scale(1.1);
-  }
+}

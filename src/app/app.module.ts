@@ -20,6 +20,7 @@ import { LoadingComponent } from './shared/loading/loading.component';
 import { ArtistaComponent } from './artista/artista.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -31,20 +32,24 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     LoadingComponent,
     NoimagePipe,
     DomseguroPipe,
+    MainComponent,
+    ToolbarComponent,
     ArtistaComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     BrowserAnimationsModule,
-    ToolbarComponent,
-    HttpClientModule,
     MatToolbar,
     MatIcon,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
   providers: [
     SpotifyService, AuthGuardService
+  ],
+  exports: [
+    ToolbarComponent  // Añade esto para exportar ToolbarComponent
   ],
   bootstrap: [AppComponent]
 })

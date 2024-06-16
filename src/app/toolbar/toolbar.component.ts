@@ -5,10 +5,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [MatToolbarModule, MatIconModule],
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
-  standalone: true
+  styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
 
