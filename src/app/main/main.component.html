@@ -1,8 +1,47 @@
 <app-toolbar></app-toolbar>
-<div class="container pb-5">
-    <div class="card-container-new-releases">
-        <h1 class="py-5"><u>Nuevos Lanzamientos</u></h1>
-        <app-tarjetas [items]="nuevaMusica"></app-tarjetas>
-        <h1 class="py-5"><u>Playlists mas populares</u></h1>
+<div class="container">
+  <div *ngIf="loading" class="loading">
+    Loading saved tracks...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <h2>Mis canciones guardadas</h2>
+    <div class="table-responsive">
+      <table class="table table">
+        <!-- Cabecera de la tabla -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Título</th>
+            <th>Artista</th>
+            <th>Album</th>
+            <th>Fecha lanzamiento</th>
+            <th>Duración</th>
+            <th>Reproductor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <!-- Cuerpo de la tabla -->
+        <tbody>
+          <tr *ngFor="let track of savedTracks">
+            <td>
+              <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" width="100" (click)="playTrack(track)" [style.cursor]="'pointer'">
+            </td>
+            <td>{{ track.track.name }}</td>
+            <td>{{ track.track.artists[0].name }}</td>
+            <td>{{ track.track.album.name }}</td>
+            <td>{{ track.track.album.release_date }}</td>
+            <td>{{ formatDuration(track.track.duration_ms) }}</td>
+            <td>
+              <iframe [src]="track.track.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

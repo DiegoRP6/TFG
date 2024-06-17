@@ -21,6 +21,7 @@ export class TarjetasComponent implements OnInit {
     }
     this.router.navigate(['/artist', artistaId])
   }
+
   ngOnInit(): void {
   }
 

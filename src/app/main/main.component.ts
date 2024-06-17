@@ -1,53 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import { ToolbarComponent } from '../shared/toolbar/toolbar.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { SpotifyService } from '../Core/spotify.service';
+import { SpotifyService } from '../Services/spotify.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent  implements OnInit {
-  // paises: any[] = [];
-  nuevaMusica: any[] = [];
-  nuevaPlaylists: any[] = [];
-  loading: boolean;
-
+export class MainComponent implements OnInit {
+  savedTracks: any[] = [];
+  loading: boolean = true;
   error: boolean = false;
-  mensajeError?: string;
-  mensajeErrorPlaylist?: string;
+  errorMessage: string = '';
+  currentSong: any = null; // Track currently being played
+  playlist: any[] = []; // Playlist of tracks for ngx-audio-player
 
+  audioPlayer: HTMLAudioElement = new Audio();
+  isPlaying: boolean = false;
 
-  constructor(private spotify: SpotifyService) { 
+  constructor(private spotifyService: SpotifyService) {}
 
-    this.loading = true;
-    this.spotify.getNewReleases()
-      .subscribe((data: any) => {
-        this.nuevaMusica = data
-        this.loading = false;
-      }, (errorServicio)=> {
-        this.loading = false;
-        this.error = true;
-        this.mensajeError = errorServicio.error.error.message;
-        console.log(errorServicio);
-      });
-
-    this.spotify.getFeaturedPlaylists()
-    .subscribe((data: any) => {
-      this.nuevaPlaylists = data
-      console.log(data)
-      this.loading = false;
-    }, (errorServicio)=> {
-      this.loading = false;
-      this.error = true;
-      this.mensajeErrorPlaylist = errorServicio.error.error.message;
-      console.log(errorServicio);
-    });
-  }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.spotifyService.getSavedTracks()
+      .subscribe(
+        (data: any[]) => {
+          this.savedTracks = data;
+          this.loading = false;
+          // Filter tracks with preview_url and construct playlist
+          this.playlist = data.filter(track => !!track.track.preview_url)
+                              .map(track => ({
+                                title: track.track.name,
+                                link: track.track.preview_url,
+                                artist: track.track.artists[0].name,
+                                duration: track.track.duration_ms,
+                                artwork: track.track.album.images[0]?.url
+                              }));
+        },
+        (error) => {
+          this.loading = false;
+          this.error = true;
+          this.errorMessage = `Error: ${error.status} - ${error.statusText}`;
+          console.error('Error fetching saved tracks:', error);
+        }
+      );
   }
 
+  removeTrack(track: any): void {
+    const trackId = track.track.id; // Assuming track has an id property
+    this.spotifyService.removeSavedTrack(trackId)
+      .subscribe(
+        () => {
+          // Remove track from savedTracks array locally
+          this.savedTracks = this.savedTracks.filter(t => t.track.id !== trackId);
+        },
+        (error) => {
+          console.error('Error removing track:', error);
+          // Handle error (e.g., show error message)
+        }
+      );
+  }
+
+  playTrack(track: any): void {
+    // Load the iframe for preview_url
+    this.audioPlayer.src = track.track.preview_url;
+    this.audioPlayer.load();
+  }
+
+  formatDuration(duration_ms: number): string {
+    const minutes: number = Math.floor(duration_ms / 60000);
+    const seconds: number = Math.floor((duration_ms % 60000) / 1000);
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+  }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,16 @@ export class SpotifyService {
   };
 
   public poolURlS = {
-    authorize: 'https://accounts.spotify.com/es-ES/authorize?client_id=' +
-      this.credentials.clientId + '&response_type=token' +
+    authorize: 'https://accounts.spotify.com/es-ES/authorize' +
+      '?client_id=' + this.credentials.clientId +
+      '&response_type=token' +
       '&redirect_uri=' + encodeURIComponent('http://localhost:4200/callback') +
+      '&scope=' + encodeURIComponent('user-library-read user-library-modify') + // Incluir el scope necesario
       '&expires_in=3600',
     refreshAccessToken: 'https://accounts.spotify.com/api/token'
   };
+  
+  
 
   constructor(private _http: HttpClient) { 
     this.upDateToken();
@@ -33,6 +37,13 @@ export class SpotifyService {
     const URL = `https://api.spotify.com/v1/${query}`;
     const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
     return this._http.get(URL, HEADER);
+  }
+
+  deleteQuery(query: string) {
+    const URL = `https://api.spotify.com/v1/${query}`;
+    const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
+    return this._http.delete(URL, HEADER).pipe(
+    );
   }
 
   checkTokenSpoLogin() {
@@ -86,5 +97,25 @@ export class SpotifyService {
   getTopPlaylistTracks(id: string) {
     return this.getQuery(`playlists/${id}/tracks?limit=15`)
       .pipe(map((data: any) => data["items"]));
+  }
+
+
+  getSavedTracks() {
+    return this.getQuery(`me/tracks`)
+      .pipe(map((data: any) => data.items));
+  }
+  
+  getFollowing() {
+    return this.getQuery(`me/following?type=artist`)
+      .pipe(map((data: any) => data.artists.items));
+  }
+
+  playTrackPreview(trackUrl: string): void {
+    const audio = new Audio(trackUrl);
+    audio.play();
+  }
+
+  removeSavedTrack(id: string) {
+    return this.deleteQuery(`me/tracks?ids=${id}`);
   }
 }

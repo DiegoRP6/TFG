@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RoutesRecognized} from '@angular/router';
 import { Location } from '@angular/common';
-import { SpotifyService } from './Core/spotify.service';
-import { PreviousRouteService } from './Core/previous-route.service';
+import { SpotifyService } from './Services/spotify.service';
+import { PreviousRouteService } from './Services/previous-route.service';
 
 @Component({
   selector: 'app-root',

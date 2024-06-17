@@ -1,11 +1,79 @@
-.card-container-new-releases {
-    position: relative;
-    z-index: 2;
+.container {
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
-:host {
-    display: block;
-    width: 100%;
-    height: 100%; 
-    background-image: url('../../assets/wallpapers/wallpaper3.jpg');
+.loading {
+  text-align: center;
+  font-size: 1.5em;
+  color: #666;
 }
+
+.error {
+  text-align: center;
+  font-size: 1.5em;
+  color: red;
+}
+
+h2 {
+  text-align: center;
+}
+
+.table-responsive {
+  overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
+}
+
+.table {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Colapso de bordes para un estilo más limpio */
+}
+
+.table th,
+.table td {
+  padding: 10px; /* Espaciado interno de celdas */
+  text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.table th {
+  color: #bcda12; /* Color de texto oscuro para encabezados */
+  font-weight: bold; /* Texto en negrita para encabezados */
+}
+
+.table td {
+  color: #0b66dd; /* Color de texto oscuro para celdas */
+  font-weight: bold;
+  font-size: 100%;
+  vertical-align: middle;
+}
+
+.table th:first-child,
+.table td:first-child {
+  padding-left: 20px; /* Espaciado izquierdo adicional para la primera columna */
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 20px; /* Espaciado derecho adicional para la última columna */
+}
+
+img {
+  border-radius: 5px; /* Bordes redondeados para imágenes */
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.5em; /* Tamaño de fuente grande */
+  font-family: 'Arial Black', sans-serif; /* Fuente en negrita */
+  color: #0f6479; /* Color de texto oscuro */
+  text-shadow: 2px 2px 4px rgba(6, 245, 253, 0.3); /* Sombra de texto 3D */
+}
+
+.table {
+  width: 100%; /* Ocupa todo el ancho disponible */
+  border-collapse: collapse; /* Colapso de bordes para un estilo más limpio */
+  background-image: url('../../assets/wallpapers/wallpaper3.jpg'); /* Ruta de tu imagen de fondo */
+  border-radius: 10px; /* Bordes redondeados para la tabla */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+

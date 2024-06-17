@@ -5,21 +5,21 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ROUTES } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
-import { SpotifyService } from './Core/spotify.service';
-import { AuthGuardService } from './Core/auth-guard.service';
+import { SpotifyService } from './Services/spotify.service';
+import { AuthGuardService } from './Services/auth-guard.service';
 import { SearchPageComponent } from './search-page/search-page.component';
-import { AccessTokenComponent } from './access-token/access-token.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
-import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { ArtistaComponent } from './artista/artista.component';
 import { NoimagePipe } from './pipes/noimage.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
 import { MainComponent } from './main/main.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { TarjetasComponent } from './cards/artist-card/tarjetas.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { MainComponent } from './main/main.component';
     LoadingComponent,
     NoimagePipe,
     DomseguroPipe,
+    ArtistaComponent,
     MainComponent,
     ToolbarComponent,
     ArtistaComponent
@@ -39,6 +40,7 @@ import { MainComponent } from './main/main.component';
     IonicModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule, 
+    NgxAudioPlayerModule,
     MatIconModule, 
     HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
