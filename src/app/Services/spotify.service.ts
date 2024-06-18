@@ -81,6 +81,16 @@ export class SpotifyService {
       .pipe(map((data: any) => data.artists.items));
   }
 
+  getAlbums(termino: string) {
+    return this.getQuery(`search?q=${termino}&type=album&limit=15`)
+      .pipe(map((data: any) => data.albums.items));
+  }
+
+  getCanciones(termino: string) {
+    return this.getQuery(`search?q=${termino}&type=track&limit=12`)
+      .pipe(map((data: any) => data.tracks.items));
+  }
+
   getPlaylist(id: string) {
     return this.getQuery(`playlists/${id}`);
   }
@@ -118,4 +128,5 @@ export class SpotifyService {
   removeSavedTrack(id: string) {
     return this.deleteQuery(`me/tracks?ids=${id}`);
   }
+
 }

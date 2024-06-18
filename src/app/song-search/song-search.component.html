@@ -1,0 +1,22 @@
+<app-toolbar></app-toolbar>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-12">
+            <div class="input-group margin-bottom-sm">
+                <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Busca una canción">
+            </div>
+        </div>
+    </div>
+    <app-loading *ngIf="loading"></app-loading>
+    <div *ngIf="!loading">
+        <div *ngIf="canciones.length > 0" class="row row-cols-1 row-cols-md-4 g-4" id="iframe-component">
+            <div *ngFor="let cancion of canciones" class="col">
+                <iframe [src]="cancion.id | domseguro" width="280" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        </div>
+        <div *ngIf="canciones.length === 0 && !loading" class="col-12 text-center mt-3">
+            <p>No se encontraron canciones.</p>
+        </div>
+    </div>
+</div>

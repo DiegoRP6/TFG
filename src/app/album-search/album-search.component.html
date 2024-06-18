@@ -1,0 +1,16 @@
+<app-toolbar></app-toolbar>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-12">
+            <div class="input-group margin-bottom-sm">
+                <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Busca un álbum">
+            </div>
+        </div>
+    </div>
+    <app-loading *ngIf="loading"></app-loading>
+    <app-album-card *ngIf="!loading && albums && albums.length > 0" [items]="albums"></app-album-card>
+    <div *ngIf="!loading && (!albums || albums.length === 0)" class="col-12 text-center mt-3">
+        <p>No se encontraron álbumes.</p>
+    </div>
+</div>

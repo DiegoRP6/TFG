@@ -1,0 +1,13 @@
+<div class="row row-cols-1 row-cols-md-4 g-4" id="cards-component">
+  <div *ngFor="let album of items" class="col">
+      <div (click)="verAlbum(album)" class="card animated fadeIn puntero" style="border: none;">
+          <img [src]="album.images | noimage" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h3 class="card-title">{{ album.name }}</h3>
+              <p class="card-text">
+                  <span *ngFor="let artista of album.artists" class="card-text badge rounded-pill text-white" style="background-color: #1DB954;">{{ artista.name }}</span>
+              </p>
+          </div>
+      </div>
+  </div>
+</div>
