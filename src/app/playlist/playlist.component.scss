@@ -1,0 +1,71 @@
+.container {
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 1.2em; /* Tamaño de fuente menor */
+    color: #555; /* Color de texto más oscuro */
+  }
+  
+  .error {
+    text-align: center;
+    font-size: 1.2em; /* Tamaño de fuente menor */
+    color: #e74c3c; /* Rojo más intenso */
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2em; /* Tamaño de fuente grande */
+    font-family: 'Arial Black', sans-serif; /* Fuente en negrita */
+    color: #80076c; /* Azul oscuro */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto más sutil */
+    margin-bottom: 20px; /* Espaciado inferior */
+  }
+  
+  .table-responsive {
+    overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
+  }
+  
+  .table {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    border-collapse: collapse; /* Colapso de bordes para un estilo más limpio */
+    background-image: url('../../assets/wallpapers/wallpaper3.jpg'); /* Ruta de tu imagen de fondo */
+    border-radius: 10px; /* Bordes redondeados para la tabla */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    margin-bottom: 20px; /* Espaciado inferior */
+  }
+
+  .table th,
+  .table td {
+    padding: 8px; /* Espaciado interno de celdas más pequeño */
+    text-align: left; /* Alineación del texto a la izquierda */
+    vertical-align: middle; /* Alineación vertical central */
+  }
+  
+  .table th {
+    color: #27ae60; /* Verde para encabezados */
+    font-weight: bold; /* Texto en negrita para encabezados */
+  }
+  
+  .table td {
+    color: #c2cf0e; /* Azul más oscuro para celdas */
+    font-weight: normal; /* Fuente normal para celdas */
+    font-size: 95%; /* Tamaño de fuente ligeramente más pequeño */
+  }
+  
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 12px; /* Espaciado izquierdo adicional para la primera columna */
+  }
+  
+  .table th:last-child,
+  .table td:last-child {
+    padding-right: 12px; /* Espaciado derecho adicional para la última columna */
+  }
+  
+  img {
+    border-radius: 5px; /* Bordes redondeados para imágenes */
+  }
+  

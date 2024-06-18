@@ -24,6 +24,12 @@ import { AlbumCardComponent } from './cards/album-card/album-card/album-card.com
 import { SongSearchComponent } from './song-search/song-search.component';
 import { AlbumComponent } from './album/album.component';
 import { ArtistCardComponent } from './cards/artist-card/artist-card.component';
+import { PlaylistCardComponent } from './cards/playlist-card/playlist-card.component';
+import { PlaylistPageComponent } from './playlist-page/playlist-page.component';
+import { PlaylistComponent } from './playlist/playlist.component';
+import { FormsModule, NgModel } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlaylistFormComponent } from './playlist-form/playlist-form.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +40,16 @@ import { ArtistCardComponent } from './cards/artist-card/artist-card.component';
     LoadingComponent,
     AlbumCardComponent,
     AlbumSearchComponent,
+    PlaylistComponent,
+    PlaylistCardComponent,
+    PlaylistPageComponent,
     AlbumComponent,
     SongSearchComponent,
     NoimagePipe,
     DomseguroPipe,
     ArtistaComponent,
     MainComponent,
+    PlaylistFormComponent,
     ToolbarComponent,
     ArtistaComponent
   ],
@@ -47,10 +57,12 @@ import { ArtistCardComponent } from './cards/artist-card/artist-card.component';
     BrowserModule,
     IonicModule.forRoot(),
     BrowserAnimationsModule,
-    MatToolbarModule, 
+    MatToolbarModule,
     NgxAudioPlayerModule,
-    MatIconModule, 
+    FormsModule,
+    MatIconModule,
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [
@@ -60,6 +72,7 @@ import { ArtistCardComponent } from './cards/artist-card/artist-card.component';
   exports: [
     ToolbarComponent  
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

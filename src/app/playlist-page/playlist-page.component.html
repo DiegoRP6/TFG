@@ -1,0 +1,37 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <div class="row my-5">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2>Tus Playlists</h2>
+      <button class="btn btn-primary" (click)="openCreatePlaylistModal(content)">Crear Playlist</button>
+    </div>
+  </div>
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div *ngIf="!loading && !error">
+    <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-component">
+      <div class="col" *ngFor="let playlist of playlists">
+        <app-playlist-card [item]="playlist"></app-playlist-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    Error fetching playlists. Please try again later.
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-playlist-form 
+    [playlistData]="playlistData" 
+    (crearPlaylist)="crearPlaylist($event)">
+  </app-playlist-form>  
+  </div>
+</ng-template>

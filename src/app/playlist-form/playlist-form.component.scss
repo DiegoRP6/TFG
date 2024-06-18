@@ -1,0 +1,37 @@
+/* Estilos para el formulario negro con letras verdes */
+.black-form {
+    background-color: #1a1a1a; /* Fondo negro */
+    color: #00ff00; /* Color de texto verde */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); /* Sombra ligera verde */
+  }
+  
+  .black-form .form-group label {
+    font-weight: bold; /* Texto en negrita */
+  }
+  
+  .black-form .form-control {
+    background-color: #333333; /* Fondo gris oscuro para campos */
+    color: #00ff00; /* Color de texto verde */
+    border-color: #00ff00; /* Borde verde */
+  }
+  
+  .black-form .form-control:focus {
+    background-color: #444444; /* Cambio de color de fondo al enfocar */
+  }
+  
+  .black-form .form-check-input:checked {
+    background-color: #00ff00; /* Color de fondo verde cuando seleccionado */
+  }
+  
+  .black-form .btn-primary {
+    background-color: #00ff00; /* Botón verde */
+    border-color: #00ff00; /* Borde verde */
+  }
+  
+  .black-form .btn-primary:hover {
+    background-color: #33ff33; /* Color de fondo más claro al pasar el mouse */
+    border-color: #33ff33; /* Borde más claro al pasar el mouse */
+  }
+  

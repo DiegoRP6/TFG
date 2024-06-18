@@ -77,3 +77,7 @@ h2 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
+.zoomed {
+  transform: scale(1.2); /* Ajusta el factor de escala según lo necesario */
+  transition: transform 0.3s ease; /* Agrega una transición suave al efecto de zoom */
+}

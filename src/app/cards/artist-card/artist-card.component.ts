@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './artist-card.component.html',
   styleUrls: ['./artist-card.component.scss']
 })
-export class ArtistCardComponent implements OnInit {
+export class ArtistCardComponent {
   
   @Input() items: any[] = [];
   constructor( private router: Router) { }
@@ -21,8 +21,4 @@ export class ArtistCardComponent implements OnInit {
     }
     this.router.navigate(['/artist', artistaId])
   }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -10,7 +10,8 @@ export class SpotifyService {
   public credentials = {
     clientId: 'd71ba7ba504e4be9a3dee860ce483d77',
     clientSecret: 'c372783099b14445a21a5e1bdf9d0747',
-    accessToken: ''
+    accessToken: '',
+    userId: '' // Added userId property
   };
 
   public poolURlS = {
@@ -18,20 +19,19 @@ export class SpotifyService {
       '?client_id=' + this.credentials.clientId +
       '&response_type=token' +
       '&redirect_uri=' + encodeURIComponent('http://localhost:4200/callback') +
-      '&scope=' + encodeURIComponent('user-library-read user-library-modify') + // Incluir el scope necesario
+      '&scope=' + encodeURIComponent('user-library-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private') + 
       '&expires_in=3600',
     refreshAccessToken: 'https://accounts.spotify.com/api/token'
   };
-  
-  
 
   constructor(private _http: HttpClient) { 
     this.upDateToken();
+    this.getUserId(); // Retrieve user ID on service initialization
   }
 
   upDateToken() {
     this.credentials.accessToken = sessionStorage.getItem('token') || '';
-    console.log('Token actualizado:', this.credentials.accessToken); // Log del token
+    console.log('Token actualizado:', this.credentials.accessToken);
   }
 
   getQuery(query: string) {
@@ -40,11 +40,10 @@ export class SpotifyService {
     return this._http.get(URL, HEADER);
   }
 
-  deleteQuery(query: string) {
+  postQuery(query: string, data: any) {
     const URL = `https://api.spotify.com/v1/${query}`;
     const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
-    return this._http.delete(URL, HEADER).pipe(
-    );
+    return this._http.post(URL, data, HEADER);
   }
 
   checkTokenSpoLogin() {
@@ -67,9 +66,11 @@ export class SpotifyService {
     }
   }
 
-  getNewReleases() {
-    return this.getQuery("browse/new-releases")
-      .pipe(map((data: any) => data.albums.items));
+  // Retrieve user ID
+  getUserId() {
+    this.getQuery('me').subscribe((data: any) => {
+      this.credentials.userId = data.id;
+    });
   }
 
   getFeaturedPlaylists() {
@@ -77,7 +78,7 @@ export class SpotifyService {
       .pipe(map((data: any) => data.playlists.items));
   }
 
-  getArtistas(termino: string) {
+  getArtists(termino: string) {
     return this.getQuery(`search?q=${termino}&type=artist&limit=15`)
       .pipe(map((data: any) => data.artists.items));
   }
@@ -97,7 +98,7 @@ export class SpotifyService {
       .pipe(map((data: any) => data.items));
   }
 
-  getCanciones(termino: string) {
+  getTracks(termino: string) {
     return this.getQuery(`search?q=${termino}&type=track&limit=12`)
       .pipe(map((data: any) => data.tracks.items));
   }
@@ -106,7 +107,12 @@ export class SpotifyService {
     return this.getQuery(`playlists/${id}`);
   }
 
-  getArtista(id: string) {
+  getPlaylistTracks(id: string) {
+    return this.getQuery(`playlists/${id}/tracks`)
+      .pipe(map((data: any) => data.items));
+  }
+
+  getArtist(id: string) {
     return this.getQuery(`artists/${id}`);
   }
 
@@ -115,29 +121,24 @@ export class SpotifyService {
       .pipe(map((data: any) => data["tracks"]));
   }
 
-  getTopPlaylistTracks(id: string) {
-    return this.getQuery(`playlists/${id}/tracks?limit=15`)
-      .pipe(map((data: any) => data["items"]));
+  getUserPlaylists() {
+    return this.getQuery(`me/playlists`)
+      .pipe(map((data: any) => data.items));
   }
-
 
   getSavedTracks() {
     return this.getQuery(`me/tracks`)
       .pipe(map((data: any) => data.items));
   }
-  
-  getFollowing() {
-    return this.getQuery(`me/following?type=artist`)
-      .pipe(map((data: any) => data.artists.items));
-  }
 
-  playTrackPreview(trackUrl: string): void {
-    const audio = new Audio(trackUrl);
-    audio.play();
+  // Método para crear una nueva lista de reproducción
+  createPlaylist(name: string, description: string, isPublic: boolean): Observable<any> {
+    const data = {
+      name: name,
+      description: description,
+      public: isPublic
+    };
+    return this.postQuery(`users/${this.credentials.userId}/playlists`, data)
+      .pipe(map((data: any) => data));
   }
-
-  removeSavedTrack(id: string) {
-    return this.deleteQuery(`me/tracks?ids=${id}`);
-  }
-
 }

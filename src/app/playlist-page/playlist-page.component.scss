@@ -1,0 +1,20 @@
+.playlist-card {
+    border: none;
+    cursor: pointer;
+  
+    .card-img-top {
+      height: 150px;
+      object-fit: cover;
+    }
+  
+    .card-body {
+      padding: 0.5rem;
+    }
+  
+    .card-title {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+  
+  /* Estilos para el modal */

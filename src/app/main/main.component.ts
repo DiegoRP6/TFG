@@ -43,31 +43,4 @@ export class MainComponent implements OnInit {
         }
       );
   }
-
-  removeTrack(track: any): void {
-    const trackId = track.track.id; // Assuming track has an id property
-    this.spotifyService.removeSavedTrack(trackId)
-      .subscribe(
-        () => {
-          // Remove track from savedTracks array locally
-          this.savedTracks = this.savedTracks.filter(t => t.track.id !== trackId);
-        },
-        (error) => {
-          console.error('Error removing track:', error);
-          // Handle error (e.g., show error message)
-        }
-      );
-  }
-
-  playTrack(track: any): void {
-    // Load the iframe for preview_url
-    this.audioPlayer.src = track.track.preview_url;
-    this.audioPlayer.load();
-  }
-
-  formatDuration(duration_ms: number): string {
-    const minutes: number = Math.floor(duration_ms / 60000);
-    const seconds: number = Math.floor((duration_ms % 60000) / 1000);
-    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-  }
 }

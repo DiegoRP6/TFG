@@ -27,6 +27,11 @@ export class ToolbarComponent implements OnInit {
     console.log('Main button clicked');
   }
 
+  onPlaylistClick() {
+    this.router.navigate(['/playlist']);
+    console.log('Playlist button clicked');
+  }
+
   onSearchClick() {
     this.router.navigate(['/search']);
     console.log('Search button clicked');

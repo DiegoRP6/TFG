@@ -7,14 +7,15 @@ export class NoimagePipe implements PipeTransform {
 
   transform(images: any[]): string {
     if (!images) {
-      return "src\assets\img\noimage.png"
+      return "../../assets/icon/logo2.png"
     }
-
+    //imagen
+    
     if (images.length > 0) {
       return images[0].url;
 
     }else {
-      return "src\assets\img\noimage.png"
+      return "../../assets/icon/logo2.png"
     }
   }
 

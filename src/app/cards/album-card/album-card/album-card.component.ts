@@ -18,5 +18,4 @@ export class AlbumCardComponent {
 
     this.router.navigate(['/album', albumId]); // Navega a la página del álbum utilizando su ID
   }
-
 }

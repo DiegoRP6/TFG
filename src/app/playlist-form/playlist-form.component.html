@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()" class="black-form">
+  <h1>CREAR PLAYLIST</h1>
+  <div class="form-group">
+    <label for="playlistName">Nombre de la Playlist</label>
+    <input type="text" class="form-control" id="playlistName" [(ngModel)]="playlistData.name" [ngModelOptions]="{ standalone: true }" required>
+  </div>
+  <div class="form-group">
+    <label for="playlistDescription">Descripción</label>
+    <textarea class="form-control" id="playlistDescription" [(ngModel)]="playlistData.description" [ngModelOptions]="{ standalone: true }" required></textarea>
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="publicPlaylist" [(ngModel)]="playlistData.public" [ngModelOptions]="{ standalone: true }">
+    <label class="form-check-label" for="publicPlaylist">¿Es pública?</label>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Aceptar</button>
+</form>

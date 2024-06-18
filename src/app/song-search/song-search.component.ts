@@ -15,7 +15,7 @@ export class SongSearchComponent {
   
   buscar(termino: string) {
     this.loading = true;
-    this.spotify.getCanciones(termino)
+    this.spotify.getTracks(termino)
       .subscribe((data: any) => {
         console.log(data);
         if (data && data.length > 0) {

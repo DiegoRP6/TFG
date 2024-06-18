@@ -6,22 +6,16 @@ import { Router } from '@angular/router';
   templateUrl: './playlist-card.component.html',
   styleUrls: ['./playlist-card.component.scss']
 })
-export class PlaylistCardComponent implements OnInit {
+export class PlaylistCardComponent {
 
-  @Input() items: any[] = [];
-  constructor( private router: Router) { }
+  @Input() item: any;
+
+  constructor(private router: Router) { }
+
+  verPlaylist(item: any) {
+    let playlistId = item.id;
+    this.router.navigate(['/playlist', playlistId]);
+  }
+
   
-  verPlaylist( item: any ) {
-    let playlistId = item.id
-
-    // if ( item.type === "artist") {
-    //   artistaId = item.id
-    // } else {
-    //   artistaId = item.artists[0].id
-    // }
-    this.router.navigate(['/playlist', playlistId])
-  }
-  ngOnInit(): void {
-  }
-
 }

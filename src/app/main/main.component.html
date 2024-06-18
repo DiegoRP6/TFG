@@ -11,7 +11,7 @@
   <div *ngIf="!loading && !error">
     <h2>Mis canciones guardadas</h2>
     <div class="table-responsive">
-      <table class="table table">
+      <table class="table">
         <!-- Cabecera de la tabla -->
         <thead>
           <tr>
@@ -20,16 +20,14 @@
             <th>Artista</th>
             <th>Álbum</th>
             <th>Fecha lanzamiento</th>
-            <th>Duración</th>
-            <th>Reproductor</th>
-            <th></th>
+            <th>Previsualización</th>
           </tr>
         </thead>
         <!-- Cuerpo de la tabla -->
         <tbody>
           <tr *ngFor="let track of savedTracks">
             <td>
-              <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" width="100" (click)="playTrack(track)" [style.cursor]="'pointer'">
+              <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" width="100">
             </td>
             <td>{{ track.track.name }}</td>
             <td>
@@ -39,9 +37,8 @@
               <a [routerLink]="['/album', track.track.album.id]">{{ track.track.album.name }}</a>
             </td>
             <td>{{ track.track.album.release_date }}</td>
-            <td>{{ formatDuration(track.track.duration_ms) }}</td>
             <td>
-              <iframe [src]="track.track.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe [src]="track.track.id | domseguro" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </td>
           </tr>
         </tbody>

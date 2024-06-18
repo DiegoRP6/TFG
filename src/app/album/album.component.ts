@@ -38,7 +38,7 @@ export class AlbumComponent implements OnInit {
         this.loadingAlbum = false;
       }, error => {
         console.error('Error fetching album:', error);
-        this.loadingAlbum = false; // Manejo básico de errores
+        this.loadingAlbum = false; 
       });
   }
 
@@ -46,10 +46,9 @@ export class AlbumComponent implements OnInit {
     this.spotify.getAlbumTracks(id)
       .subscribe(tracks => {
         console.log(tracks);
-        this.tracks = tracks.items; // Asigna tracks.items en lugar de solo tracks
+        this.tracks = tracks.items;
       }, error => {
         console.error('Error fetching album tracks:', error);
       });
   }  
-
 }
