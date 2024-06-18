@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -84,6 +85,16 @@ export class SpotifyService {
   getAlbums(termino: string) {
     return this.getQuery(`search?q=${termino}&type=album&limit=15`)
       .pipe(map((data: any) => data.albums.items));
+  }
+
+  getAlbum(id: string){
+    return this.getQuery(`albums/${id}`)
+      .pipe(map((data: any) => data));
+  }
+
+  getAlbumTracks(id: string): Observable<any> {
+    return this.getQuery(`albums/${id}/tracks`)
+      .pipe(map((data: any) => data.items));
   }
 
   getCanciones(termino: string) {

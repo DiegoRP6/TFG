@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tarjetas',
-  templateUrl: './tarjetas.component.html',
-  styleUrls: ['./tarjetas.component.scss']
+  selector: 'app-artist-card',
+  templateUrl: './artist-card.component.html',
+  styleUrls: ['./artist-card.component.scss']
 })
-export class TarjetasComponent implements OnInit {
+export class ArtistCardComponent implements OnInit {
   
   @Input() items: any[] = [];
   constructor( private router: Router) { }

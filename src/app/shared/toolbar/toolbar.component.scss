@@ -6,8 +6,15 @@
 }
 
 .logo img {
-  width: 40px; /* Tamaño de la imagen del logo */
-  margin-right: 10px; /* Espacio entre la imagen y el texto */
+  width: 50px; 
+  margin-right: 10px; 
+}
+
+.app-name {
+  font-size: 1.5em; 
+  font-weight: bold;
+  color: skyblue;
+  text-shadow: 4px 4px 1px rgba(255, 255, 255, 0.3);
 }
 
 .icon-buttons {
@@ -17,22 +24,22 @@
 }
 
 .round-button {
-  margin: 0 5px; /* Reducir el margen */
-  padding: 8px 16px; /* Reducir el padding */
-  border-radius: 15px; /* Bord es redondeados */
-  background-color: lightseagreen; /* Color de fondo */
-  color: white; /* Color del texto */
+  margin: 0 5px;
+  padding: 8px 16px;
+  border-radius: 15px; 
+  background-color: lightseagreen; 
+  color: white; 
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  font-size: 0.8em; /* Reducir el tamaño de la fuente */
+  font-size: 0.8em;
 }
 
 .round-button:hover {
-  background-color: darkseagreen; /* Cambio de color al hacer hover */
+  background-color: darkseagreen;
 }
 
-.logo{
+.logo {
   margin-right: 60%;
 }

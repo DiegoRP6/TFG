@@ -1,0 +1,47 @@
+<div class="container">
+    <app-loading *ngIf="loadingAlbum"></app-loading>
+
+    <!-- Información del Álbum -->
+    <div *ngIf="!loadingAlbum" class="row animated fadeIn pt-3">
+        <div class="col-4">
+            <div class="album-banner">
+                <img [src]="album.images[0]?.url" class="album-banner-image rounded-circle" alt="image">
+            </div>
+        </div>
+        <div class="col-6 album-info">
+            <h2>Álbum:</h2>
+            <h1>{{ album.name }} </h1>
+            <h2><span class="release-date">({{ album.release_date }})</span></h2>
+            <p>Por <span class="artist-name"><a [routerLink]="['/artist', album.artists[0]?.id]">{{ album.artists[0]?.name }}</a></span></p>
+        </div>
+        <div class="col-2 align-self-start back-button">
+            <button routerLink="/search" class="btn btn-outline-danger btn-lg">
+                Atrás
+            </button>
+        </div>
+    </div>
+    
+    <!-- Lista de Canciones -->
+    <div class="row mt-5" *ngIf="!loadingAlbum">
+        <div class="col">
+            <table class="table table-borderless text-white align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Canción</th>
+                        <th>Vista Previa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of album.tracks.items; let i = index" class="cancionesInfo">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ track.name }}</td>
+                        <td>
+                            <iframe [src]="track.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -32,11 +32,6 @@ export class ToolbarComponent implements OnInit {
     console.log('Search button clicked');
   }
 
-  onMailClick() {
-    this.router.navigate(['/contact']);
-    console.log('Mail button clicked');
-  }
-
   onSearchArtistsClick() {
     this.router.navigate(['/search/artists']);
     console.log('Search Artists button clicked');

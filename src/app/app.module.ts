@@ -19,20 +19,22 @@ import { NoimagePipe } from './pipes/noimage.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
 import { MainComponent } from './main/main.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import { TarjetasComponent } from './cards/artist-card/tarjetas.component';
 import { AlbumSearchComponent } from './album-search/album-search.component';
 import { AlbumCardComponent } from './cards/album-card/album-card/album-card.component';
 import { SongSearchComponent } from './song-search/song-search.component';
+import { AlbumComponent } from './album/album.component';
+import { ArtistCardComponent } from './cards/artist-card/artist-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TarjetasComponent,
+    ArtistCardComponent,
     HomePageComponent,
     SearchPageComponent,
     LoadingComponent,
     AlbumCardComponent,
     AlbumSearchComponent,
+    AlbumComponent,
     SongSearchComponent,
     NoimagePipe,
     DomseguroPipe,
@@ -53,8 +55,8 @@ import { SongSearchComponent } from './song-search/song-search.component';
   ],
   providers: [
     SpotifyService, 
-    AuthGuardService
-  ],
+    AuthGuardService,
+   ],
   exports: [
     ToolbarComponent  
   ],

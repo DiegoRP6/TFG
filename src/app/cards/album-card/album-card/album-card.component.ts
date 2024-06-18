@@ -13,7 +13,9 @@ export class AlbumCardComponent {
   constructor(private router: Router) { }
 
   verAlbum(album: any) {
-    let albumId = album.id; // Suponiendo que el objeto álbum tiene un campo `id` que identifica de manera única al álbum
+    let albumId = album.id; 
+    console.log('ID del álbum:', albumId); // Agregar un log para verificar el ID del álbum
+
     this.router.navigate(['/album', albumId]); // Navega a la página del álbum utilizando su ID
   }
 

@@ -8,6 +8,7 @@ import { ArtistaComponent } from './artista/artista.component';
 import { AuthGuardService } from './Services/auth-guard.service';
 import { AlbumSearchComponent } from './album-search/album-search.component';
 import { SongSearchComponent } from './song-search/song-search.component';
+import { AlbumComponent } from './album/album.component';
 
 
 export const ROUTES: Routes = [
@@ -19,7 +20,7 @@ export const ROUTES: Routes = [
   { path: "access-token", component: AccessTokenComponent},
   { path: "main", component: MainComponent},
   { path: "artist/:id", component: ArtistaComponent, canActivate: [AuthGuardService]},
+  { path: "album/:id", component: AlbumComponent, canActivate: [AuthGuardService]},
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: '**', pathMatch: 'full', redirectTo: 'home'},
-  
 ];
