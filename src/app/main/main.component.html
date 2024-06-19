@@ -15,7 +15,6 @@
         <thead>
           <tr>
             <th></th>
-            <th>Título</th>
             <th>Artista</th>
             <th>Album</th>
             <th>Fecha lanzamiento</th>
@@ -27,12 +26,11 @@
             <td>
               <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" width="100" >
             </td>
-            <td>{{ track.track.name }}</td>
             <td>{{ track.track.artists[0].name }}</td>
             <td>{{ track.track.album.name }}</td>
             <td>{{ track.track.album.release_date }}</td>
             <td>
-              <iframe [src]="track.track.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe [src]="track.track.id | domseguro" width="350" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </td>
           </tr>
         </tbody>
