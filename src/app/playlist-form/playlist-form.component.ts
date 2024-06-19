@@ -8,8 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class PlaylistFormComponent {
   @Input() playlistData: any;
   @Output() crearPlaylist = new EventEmitter<any>();
-
-  // Puedes agregar métodos y lógica aquí si es necesario
+  dialogRef: any;
 
   onSubmit() {
     this.crearPlaylist.emit(this.playlistData);

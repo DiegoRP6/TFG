@@ -141,4 +141,9 @@ export class SpotifyService {
     return this.postQuery(`users/${this.credentials.userId}/playlists`, data)
       .pipe(map((data: any) => data));
   }
+
+  addTrackToPlaylist(playlistId: string, trackUri: string): Observable<any> {
+    return this.postQuery(`playlists/${playlistId}/tracks`, { uris: [trackUri] })
+      .pipe(map((data: any) => data));
+  }
 }

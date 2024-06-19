@@ -24,7 +24,7 @@
         <tbody>
           <tr *ngFor="let track of playlist.tracks.items">
             <td>
-              <img [src]="track.track.album.images[0]?.url | noimage" alt="{{ track.track.name }}" style="max-width: 100px; height: auto; object-fit: cover; border-radius: 5px;">
+              <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" style="max-width: 100px; height: auto; object-fit: cover; border-radius: 5px;">
             </td>
             <td>{{ track.track.name }}</td>
             <td>

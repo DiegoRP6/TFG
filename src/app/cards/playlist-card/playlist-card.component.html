@@ -1,5 +1,6 @@
 <div (click)="verPlaylist(item)" class="card animated fadeIn puntero" style="border: none;">
-  <img [src]="item.images[0]?.url" class="card-img-top" alt="...">
+  <img *ngIf="item.images && item.images.length > 0" [src]="item.images[0]?.url" class="card-img-top" alt="...">
+  <img *ngIf="!item.images || item.images.length === 0" src="../../../assets/img/noimage.png" class="card-img-top" alt="No Image">
   <div class="card-body">
     <h5 class="card-title">{{ item.name }}</h5>
   </div>
