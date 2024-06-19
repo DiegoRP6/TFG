@@ -1,7 +1,7 @@
 .container {
-  padding: 20px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  padding: 20px;
+  border-radius: 10px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
 
 .loading {
@@ -21,27 +21,27 @@ h2 {
 }
 
 .table-responsive {
-  overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
+  overflow-x: auto; 
 }
 
 .table {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  border-collapse: collapse; /* Colapso de bordes para un estilo más limpio */
+  width: 100%; 
+  border-collapse: collapse;
 }
 
 .table th,
 .table td {
-  padding: 10px; /* Espaciado interno de celdas */
-  text-align: left; /* Alineación del texto a la izquierda */
+  padding: 10px; 
+  text-align: left; 
 }
 
 .table th {
-  color: #bcda12; /* Color de texto oscuro para encabezados */
-  font-weight: bold; /* Texto en negrita para encabezados */
+  color: #bcda12;
+  font-weight: bold; 
 }
 
 .table td {
-  color: #0b66dd; /* Color de texto oscuro para celdas */
+  color: #0b66dd; 
   font-weight: bold;
   font-size: 100%;
   vertical-align: middle;
@@ -49,35 +49,35 @@ h2 {
 
 .table th:first-child,
 .table td:first-child {
-  padding-left: 20px; /* Espaciado izquierdo adicional para la primera columna */
+  padding-left: 20px;
 }
 
 .table th:last-child,
 .table td:last-child {
-  padding-right: 20px; /* Espaciado derecho adicional para la última columna */
+  padding-right: 20px;
 }
 
 img {
-  border-radius: 5px; /* Bordes redondeados para imágenes */
+  border-radius: 5px; 
 }
 
 h2 {
   text-align: center;
-  font-size: 2.5em; /* Tamaño de fuente grande */
-  font-family: 'Arial Black', sans-serif; /* Fuente en negrita */
-  color: #0f6479; /* Color de texto oscuro */
-  text-shadow: 2px 2px 4px rgba(6, 245, 253, 0.3); /* Sombra de texto 3D */
+  font-size: 2.5em; 
+  font-family: 'Arial Black', sans-serif;
+  color: #0f6479; 
+  text-shadow: 2px 2px 4px rgba(6, 245, 253, 0.3); 
 }
 
 .table {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  border-collapse: collapse; /* Colapso de bordes para un estilo más limpio */
-  background-image: url('../../assets/wallpapers/wallpaper3.jpg'); /* Ruta de tu imagen de fondo */
-  border-radius: 10px; /* Bordes redondeados para la tabla */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  width: 100%; 
+  border-collapse: collapse; 
+  background-image: url('../../assets/wallpapers/wallpaper3.jpg');
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .zoomed {
-  transform: scale(1.2); /* Ajusta el factor de escala según lo necesario */
-  transition: transform 0.3s ease; /* Agrega una transición suave al efecto de zoom */
+  transform: scale(1.2); 
+  transition: transform 0.3s ease;
 }

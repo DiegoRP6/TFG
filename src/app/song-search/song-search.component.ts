@@ -19,29 +19,24 @@ export class SongSearchComponent {
       .subscribe((data: any) => {
         console.log(data);
         if (data && data.length > 0) {
-          // Intenta encontrar la estructura correcta en la respuesta de Spotify
           let items = data.map((item: any) => ({
             id: item.id,
             name: item.name,
             artists: item.artists
           }));
-  
-          // Si encuentras la estructura correcta, asigna los datos a this.canciones
           this.canciones = items;
         } else {
           console.error('La respuesta de Spotify no contiene la estructura esperada:', data);
-          this.canciones = []; // Limpiar canciones en caso de una respuesta inesperada
         }
         this.loading = false;
       }, error => {
         console.error('Error al buscar canciones:', error);
         this.loading = false;
-        this.canciones = []; // Limpiar canciones en caso de error
+        this.canciones = [];
       });
   }
 
   getEmbedUrl(cancion: any): string {
-    // Construir la URL de embebido de Spotify
     return `https://open.spotify.com/embed/track/${cancion.id}`;
   }
 

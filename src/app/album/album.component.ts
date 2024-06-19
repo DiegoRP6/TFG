@@ -15,7 +15,6 @@ export class AlbumComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private spotify: SpotifyService,
   ) { }
 

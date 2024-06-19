@@ -11,8 +11,8 @@ export class MainComponent implements OnInit {
   loading: boolean = true;
   error: boolean = false;
   errorMessage: string = '';
-  currentSong: any = null; // Track currently being played
-  playlist: any[] = []; // Playlist of tracks for ngx-audio-player
+  currentSong: any = null;
+  playlist: any[] = []; 
 
   audioPlayer: HTMLAudioElement = new Audio();
   isPlaying: boolean = false;
@@ -25,7 +25,6 @@ export class MainComponent implements OnInit {
         (data: any[]) => {
           this.savedTracks = data;
           this.loading = false;
-          // Filter tracks with preview_url and construct playlist
           this.playlist = data.filter(track => !!track.track.preview_url)
                               .map(track => ({
                                 title: track.track.name,

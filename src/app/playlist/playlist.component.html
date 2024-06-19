@@ -10,7 +10,6 @@
     <h2>{{ playlist.name }}</h2>
     <div class="table-responsive">
       <table class="table">
-        <!-- Cabecera de la tabla -->
         <thead>
           <tr>
             <th>Foto</th>
@@ -18,9 +17,9 @@
             <th>Artista</th>
             <th>Álbum</th>
             <th>Previsualización</th>
+            <th>Acciones</th> <!-- Nueva columna para botones de acción -->
           </tr>
         </thead>
-        <!-- Cuerpo de la tabla -->
         <tbody>
           <tr *ngFor="let track of playlist.tracks.items">
             <td>
@@ -35,6 +34,9 @@
             </td>
             <td>
               <iframe [src]="track.track.id | domseguro" width="280px" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteTrackFromPlaylist(track.track.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>

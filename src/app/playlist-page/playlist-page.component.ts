@@ -50,11 +50,11 @@ export class PlaylistPageComponent implements OnInit {
         (response) => {
           console.log('Playlist creada:', response);
           modal.close();
-          this.getUserPlaylists(); // Actualizar la lista de playlists
-          this.playlistData.name = ''; // Limpiar el campo de nombre después de crear la playlist
-          this.playlistData.description = ''; // Limpiar el campo de descripción después de crear la playlist
-          this.playlistData.public = false; // Restablecer la opción pública después de crear la playlist
-          this.error = false; // Reiniciar el estado de error a falso
+          this.getUserPlaylists(); 
+          this.playlistData.name = ''; 
+          this.playlistData.description = ''; 
+          this.playlistData.public = false; 
+          this.error = false; 
         },
         (error) => {
           console.error('Error al crear la playlist:', error);

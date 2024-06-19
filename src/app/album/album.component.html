@@ -1,7 +1,5 @@
 <div class="container">
     <app-loading *ngIf="loadingAlbum"></app-loading>
-
-    <!-- Información del Álbum -->
     <div *ngIf="!loadingAlbum" class="row animated fadeIn pt-3">
         <div class="col-4">
             <div class="album-banner">
@@ -20,8 +18,6 @@
             </button>
         </div>
     </div>
-    
-    <!-- Lista de Canciones -->
     <div class="row mt-5" *ngIf="!loadingAlbum">
         <div class="col">
             <table class="table table-borderless text-white align-middle">
@@ -29,15 +25,13 @@
                     <tr>
                         <th>#</th>
                         <th>Canción</th>
-                        <th>Vista Previa</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let track of album.tracks.items; let i = index" class="cancionesInfo">
                         <td>{{ i + 1 }}</td>
-                        <td>{{ track.name }}</td>
                         <td>
-                            <iframe [src]="track.id | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <iframe [src]="track.id | domseguro" width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                         </td>
                     </tr>
                 </tbody>

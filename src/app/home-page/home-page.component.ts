@@ -6,12 +6,10 @@ import { SpotifyService } from '../Services/spotify.service';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
 
   constructor(private spotify: SpotifyService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
 
   redirectToMain(): void {
     this.router.navigate(['/main']);

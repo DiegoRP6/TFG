@@ -16,9 +16,9 @@ export class AlbumSearchComponent {
   buscar(termino: string) {
     this.loading = true;
     this.spotify.getAlbums(termino)
-      .subscribe((data: any[]) => { // Asegúrate de tipar data como any[] o el tipo correcto
+      .subscribe((data: any[]) => { 
         console.log(data);
-        this.albums = data; // Asigna directamente el arreglo de álbumes
+        this.albums = data; 
         this.loading = false;
       }, error => {
         console.error('Error al buscar álbumes:', error);

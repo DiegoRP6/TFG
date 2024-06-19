@@ -7,7 +7,7 @@ export class NoimagePipe implements PipeTransform {
 
   transform(images: any[]): string {
     if (!images) {
-      return "../../assets/icon/logo2.png"
+      return "../../assets/img/noimage.png"
     }
     //imagen
     
@@ -15,7 +15,7 @@ export class NoimagePipe implements PipeTransform {
       return images[0].url;
 
     }else {
-      return "../../assets/icon/logo2.png"
+      return "../../assets/img/noimage.png"
     }
   }
 
