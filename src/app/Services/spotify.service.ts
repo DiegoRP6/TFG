@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,6 +12,7 @@ export class SpotifyService {
     clientId: 'd71ba7ba504e4be9a3dee860ce483d77',
     clientSecret: 'c372783099b14445a21a5e1bdf9d0747',
     accessToken: '', // Initialize access token
+    refreshToken: '', // Refresh token to get a new access token when the current one expires
     userId: '' // Initialize user ID
   };
 
@@ -27,20 +28,53 @@ export class SpotifyService {
   };
 
   constructor(private _http: HttpClient) { 
-    this.upDateToken(); 
-    this.getUserId(); 
+    this.upDateToken();
+    this.getUserId();
   }
-  
+
+  // Update the access token from session storage
   upDateToken() {
     this.credentials.accessToken = sessionStorage.getItem('token') || '';
+    this.credentials.refreshToken = sessionStorage.getItem('refresh_token') || ''; // Add refreshToken to session storage
     console.log('Token updated:', this.credentials.accessToken);
+  }
+
+  // Refresh access token using the refresh token
+  refreshToken() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams({
+      'grant_type': 'refresh_token',
+      'refresh_token': this.credentials.refreshToken,
+      'client_id': this.credentials.clientId,
+      'client_secret': this.credentials.clientSecret
+    }).toString();
+
+    return this._http.post(this.poolURlS.refreshAccessToken, body, { headers })
+      .pipe(
+        map((response: any) => {
+          this.credentials.accessToken = response.access_token;
+          sessionStorage.setItem('token', this.credentials.accessToken); // Store the new access token
+        }),
+        catchError(error => {
+          console.error('Error refreshing token:', error);
+          return throwError(error);
+        })
+      );
   }
 
   // Construct and execute GET request with authorization header
   getQuery(query: string) {
     const URL = `https://api.spotify.com/v1/${query}`;
     const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
-    return this._http.get(URL, HEADER);
+    return this._http.get(URL, HEADER).pipe(
+      catchError(error => {
+        console.error('Error occurred:', error);
+        return throwError(error);
+      })
+    );
   }
 
   // Construct and execute POST request with authorization header
@@ -60,15 +94,20 @@ export class SpotifyService {
 
   // Check if Spotify access token exists
   checkTokenSpo() {
+    if (!this.credentials.accessToken) {
+      return false;
+    }
+    // Si es necesario verificar la validez del token, puedes hacer una pequeña solicitud a la API para validar su existencia.
     return !!this.credentials.accessToken;
   }
 
   // Handle token expiration; clear token and redirect to authorization URL
   tokenRefreshURL() {
-    if (this.checkTokenSpo()) {
+    if (!this.credentials.accessToken) {
       alert('Session expired');
       this.credentials.accessToken = '';
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('refresh_token'); // Also remove the refresh token
       this.checkTokenSpoLogin();
     }
   }
@@ -160,7 +199,8 @@ export class SpotifyService {
     return this.postQuery(`users/${this.credentials.userId}/playlists`, data)
       .pipe(map((data: any) => data));
   }
-//delete a track from a playlist
+
+  // Delete a track from a playlist
   deleteTrackFromPlaylist(playlistId: string, trackId: string) {
     const URL = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
     const options = {

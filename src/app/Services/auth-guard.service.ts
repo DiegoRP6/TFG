@@ -12,10 +12,9 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-      this._SpotifyService.checkTokenSpoLogin();
-      return this._SpotifyService.checkTokenSpo();
-
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    this._SpotifyService.checkTokenSpoLogin();
+    return this._SpotifyService.checkTokenSpo();
   }
 }
