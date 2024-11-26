@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/operators';
-import { RelatedArtist } from '../modules/relatedArtist.model';
 
 @Injectable({
   providedIn: 'root'
