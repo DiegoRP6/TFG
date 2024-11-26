@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
+import { RelatedArtist } from '../modules/relatedArtist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +19,30 @@ export class SpotifyService {
   };
 
   // Spotify API endpoints
-  public poolURlS = {
-    authorize: `https://accounts.spotify.com/es-ES/authorize?` +
-      `client_id=${this.credentials.clientId}` +
-      `&response_type=token` +
-      `&redirect_uri=${encodeURIComponent('http://localhost:4200/callback')}` +
-      `&scope=${encodeURIComponent('user-library-read user-library-modify playlist-read-private playlist-modify-public playlist-modify-private')}` +
-      `&expires_in=3600`,
+public poolURlS = {
+  authorize: `https://accounts.spotify.com/es-ES/authorize?` +
+    `client_id=${this.credentials.clientId}` +
+    `&response_type=token` +
+    `&redirect_uri=${encodeURIComponent('http://localhost:4200/callback')}` +
+    `&scope=${encodeURIComponent(
+      'user-library-read ' +
+      'user-library-modify ' +
+      'playlist-read-private ' +
+      'playlist-modify-public ' +
+      'playlist-modify-private ' +
+      'user-follow-read ' +
+      'user-top-read ' +
+      'user-read-private ' +
+      'user-read-email ' +
+      'playlist-read-collaborative ' +
+      'streaming ' +
+      'app-remote-control ' +
+      'user-read-playback-state ' +
+      'user-modify-playback-state ' +
+      'user-read-currently-playing ' +
+      'user-follow-modify'
+    )}` +
+    `&expires_in=3600`,
     refreshAccessToken: 'https://accounts.spotify.com/api/token'
   };
 
@@ -77,11 +96,43 @@ export class SpotifyService {
     );
   }
 
+  getIsFollowingQuery<T>(query: string): Observable<T> {
+    const URL = `https://api.spotify.com/v1/${query}`;
+    const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
+    return this._http.get<T>(URL, HEADER).pipe(
+      catchError(error => {
+        console.error('Error occurred:', error);
+        return throwError(error);
+      })
+    );
+  }
+
   // Construct and execute POST request with authorization header
   postQuery(query: string, data: any) {
     const URL = `https://api.spotify.com/v1/${query}`;
     const HEADER = { headers: new HttpHeaders({ 'Authorization': 'Bearer ' + this.credentials.accessToken }) };
     return this._http.post(URL, data, HEADER);
+  }
+  
+  putQuery(query: string, data: any) {
+    const URL = `https://api.spotify.com/v1/${query}`;
+    const HEADER = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.credentials.accessToken,
+      'Content-Type': 'application/json'
+    });
+  
+    return this._http.put(URL, data, { headers: HEADER });
+  }
+
+  deleteQuery(endpoint: string, data: any) {
+    const url = `https://api.spotify.com/v1/${endpoint}`;
+    return this._http.delete(url, {
+      headers: {
+      'Authorization': 'Bearer ' + this.credentials.accessToken,
+      'Content-Type': 'application/json'
+      },
+      body: data  // El cuerpo de la solicitud con los IDs
+    });
   }
 
   // Check if Spotify access token exists; if not, redirect to authorization URL
@@ -173,7 +224,7 @@ export class SpotifyService {
 
   // Retrieve top tracks of an artist by artist ID
   getTopTracks(id: string) {
-    return this.getQuery(`artists/${id}/top-tracks?market=US`)
+    return this.getQuery(`artists/${id}/top-tracks?market=US&limit=5`)
       .pipe(map((data: any) => data["tracks"]));
   }
 
@@ -186,7 +237,9 @@ export class SpotifyService {
   // Retrieve user's saved tracks
   getSavedTracks() {
     return this.getQuery(`me/tracks`)
-      .pipe(map((data: any) => data.items));
+      .pipe(
+        debounceTime(1000), 
+        map((data: any) => data.items));
   }
 
   // Create a new playlist for the user
@@ -214,4 +267,40 @@ export class SpotifyService {
     };
     return this._http.delete(URL, options);
   }
+
+  //Get related artists
+  getRelatedArtists(id: string) {
+    return this.getQuery(`artists/${id}/related-artists?limit=4`)
+    .pipe(map((data: any) => data.artists));
+  }
+
+
+  followArtist(ids: string[]) {
+    const data = { ids }; // Enviamos los IDs como un array dentro de un objeto
+    this.putQuery('me/following?type=artist', data).subscribe(
+      (response) => {
+        console.log('Artistas seguidos correctamente:', response);
+      },
+      (error) => {
+        console.error('Error al seguir a los artistas:', error);
+      }
+    );
+  }
+
+  unfollowArtist(ids: string[]): void {
+    const data = { ids }; // Enviamos los IDs de los artistas a dejar de seguir
+    this.deleteQuery('me/following?type=artist', data).subscribe(
+      (response) => {
+        console.log('Artistas dejados de seguir correctamente:', response);
+      },
+      (error) => {
+        console.error('Error al dejar de seguir a los artistas:', error);
+      }
+    );
+  }
+  
+  isFollowingArtist(id: string): Observable<boolean[]> {
+    return this.getIsFollowingQuery<boolean[]>(`me/following/contains?type=artist&ids=${id}`);
+  }
+  
 }

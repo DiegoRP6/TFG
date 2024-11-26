@@ -5,22 +5,26 @@
             <div class="artist-banner">
                 <img [src]="artista.images | noimage" class="artist-banner-image" alt="image">
             </div>
+        </div>     
+        <div class="col-6 artist-info d-flex flex-column justify-content-start">
+            <h1>{{artista.name}}
+                <br>
+                <span class="follower-count">{{artista.followers.total | number}} seguidores    
+                    <br>         
+                    <!-- Botón condicional para seguir o dejar de seguir -->
+                    <button *ngIf="!following" class="btn btn-primary mt-2" (click)="seguirArtista(artista.id)">+ Seguir</button>
+                    <button *ngIf="following" class="btn btn-secondary mt-2" (click)="unfollowArtist(artista.id)">Siguiendo</button>
+                </span> 
+            </h1>
         </div>
-        <div class="col-6 artist-info">
-            <h2>Artista :</h2>
-            <h1>{{artista.name}} <span class="follower-count">{{artista.followers.total | number}} seguidores</span></h1>
-            <p>
-                <a [href]="artista.external_urls.spotify" target="_blank">
-                    Ve a la página del artista
-                </a>
-            </p>
-        </div>
+        
         <div class="col-2 align-self-start back-button">
             <button routerLink="/search" class="btn btn-outline-danger">
                 Atrás
             </button>
         </div>
     </div>
+
     <div class="row mt-5" *ngIf="!loadingArtist">
         <h1>Canciones más populares</h1>
         <div class="col">
@@ -44,4 +48,10 @@
             </table>
         </div>
     </div>
+
+    <div class="row mt-5">
+        <h1>Artistas relacionados: </h1>
+        <br><br><br>
+    </div>
+    <app-artist-card [items]="artists"></app-artist-card>
 </div>

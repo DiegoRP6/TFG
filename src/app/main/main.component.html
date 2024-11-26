@@ -26,8 +26,12 @@
             <td>
               <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" width="100" >
             </td>
-            <td>{{ track.track.artists[0].name }}</td>
-            <td>{{ track.track.album.name }}</td>
+            <td>
+              <a [href]="'#/artist/' + track.track.artists[0].id">{{ track.track.artists[0].name }}</a>
+            </td>
+            <td>
+              <a [href]="'#/album/' + track.track.album.id">{{ track.track.album.name }}</a>
+            </td>
             <td>{{ track.track.album.release_date }}</td>
             <td>
               <iframe [src]="track.track.id | domseguro" width="350" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
