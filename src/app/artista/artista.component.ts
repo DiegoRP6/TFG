@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from '../Services/spotify.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-artista',
@@ -13,8 +14,12 @@ export class ArtistaComponent implements OnInit {
   loadingArtist: boolean = true;
   artists: any[] = [];
   following: boolean = false;
+  viewType: 'html' | 'iframe' = 'html';
+  safeUrl: SafeResourceUrl = ''; 
 
-  constructor(private router: ActivatedRoute, private spotify: SpotifyService) { }
+
+  constructor(private router: ActivatedRoute, private spotify: SpotifyService, private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
@@ -40,6 +45,7 @@ export class ArtistaComponent implements OnInit {
         console.log(artista);
         this.artista = artista;
         this.loadingArtist = false;
+        this.setIframeUrl();
       });
   }
 
@@ -67,5 +73,13 @@ export class ArtistaComponent implements OnInit {
   unfollowArtist(id: string) {
     this.spotify.unfollowArtist([id]); // Pasamos el id dentro de un array
     window.location.reload();  // Recargar la página después de dejar de seguir al artista
+  }
+
+  toggleView(view: 'html' | 'iframe') {
+    this.viewType = view;
+  }
+
+  setIframeUrl() {
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://open.spotify.com/embed/artist/${this.artista.id}?utm_source=generator`);
   }
 }

@@ -6,41 +6,16 @@
   </div>
 
   <div *ngIf="!loadingPlaylist && playlist">
-    <h2>PLAYLIST</h2>
-    <h2>{{ playlist.name }}</h2>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Foto</th>
-            <th>Canción</th>
-            <th>Artista</th>
-            <th>Álbum</th>
-            <th>Previsualización</th>
-            <th>Acciones</th> <!-- Nueva columna para botones de acción -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let track of playlist.tracks.items">
-            <td>
-              <img [src]="track.track.album.images[0]?.url" alt="{{ track.track.name }}" style="max-width: 100px; height: auto; object-fit: cover; border-radius: 5px;">
-            </td>
-            <td>{{ track.track.name }}</td>
-            <td>
-              <a [routerLink]="['/artist', track.track.artists[0].id]" class="text-decoration-none">{{ track.track.artists[0].name }}</a>
-            </td>
-            <td>
-              <a [routerLink]="['/album', track.track.album.id]" class="text-decoration-none">{{ track.track.album.name }}</a>
-            </td>
-            <td>
-              <iframe [src]="track.track.id | domseguro" width="280px" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </td>
-            <td>
-              <button class="btn btn-outline-danger btn-sm" (click)="deleteTrackFromPlaylist(track.track.id)">Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    
+    <div class="iframe-container">
+      <iframe 
+        [src]="safeUrl" 
+        width="100%" 
+        height="660px"  
+        frameborder="0" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+      </iframe>    
     </div>
   </div>
 </div>

@@ -1,41 +1,64 @@
 <div class="container">
     <app-loading *ngIf="loadingAlbum"></app-loading>
-    <div *ngIf="!loadingAlbum" class="row animated fadeIn pt-3">
-        <div class="col-4">
-            <div class="album-banner">
-                <img [src]="album.images[0]?.url" class="album-banner-image rounded-circle" alt="image">
-            </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+            <button class="btn btn-info btn-lg rounded-pill mt-2" (click)="toggleView('html')">HTML</button>
         </div>
-        <div class="col-6 album-info">
-            <h2>Álbum:</h2>
-            <h1>{{ album.name }} </h1>
-            <h2><span class="release-date">({{ album.release_date }})</span></h2>
-            <p>Por <span class="artist-name"><a [routerLink]="['/artist', album.artists[0]?.id]">{{ album.artists[0]?.name }}</a></span></p>
+        <div class="col-auto">
+            <button class="btn btn-info btn-lg rounded-pill mt-2" (click)="toggleView('iframe')">iFrame</button>
         </div>
-        <div class="col-2 align-self-start back-button">
-            <button routerLink="/search" class="btn btn-outline-danger btn-lg">
+
+        <!-- Botón Atrás alineado a la derecha -->
+        <div class="col-auto ml-auto">
+            <button routerLink="/search" style="margin-left: 500px;" class="btn btn-danger btn-lg rounded-pill mt-2">
                 Atrás
             </button>
         </div>
     </div>
-    <div class="row mt-5" *ngIf="!loadingAlbum">
-        <div class="col">
-            <table class="table table-borderless text-white align-middle">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Canción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let track of album.tracks.items; let i = index" class="cancionesInfo">
-                        <td>{{ i + 1 }}</td>
-                        <td>
-                            <iframe [src]="track.id | domseguro" width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
+    <div *ngIf="viewType === 'html'" class="col-12">
+        <div *ngIf="!loadingAlbum" class="row animated fadeIn pt-3">
+            <div class="col-4">
+                <div class="album-banner">
+                    <img [src]="album.images[0]?.url" class="album-banner-image rounded-circle" alt="image">
+                </div>
+            </div>
+            <div class="col-6 album-info">
+                <h2>Álbum:</h2>
+                <h1>{{ album.name }} </h1>
+                <h2><span class="release-date">({{ album.release_date }})</span></h2>
+                <p>Por <span class="artist-name"><a [routerLink]="['/artist', album.artists[0]?.id]">{{ album.artists[0]?.name }}</a></span></p>
+            </div>
+        </div>
+        <div class="row mt-5" *ngIf="!loadingAlbum">
+            <div class="col-12 d-flex justify-content-center">
+                <table class="table table-borderless text-white align-middle">
+                    <thead>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let track of album.tracks.items; let i = index" class="cancionesInfo">
+                            <td style="font-size: 30px; font-weight: bold;">{{ i + 1 }}</td>
+                            <td>
+                                <iframe [src]="track.id | domseguro" width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+
+            <!-- Vista iFrame -->
+    <div *ngIf="viewType === 'iframe'" class="col-12">
+        <br>
+        <iframe 
+            [src]="safeUrl" 
+            width="100%"
+            height="660px"                  
+            frameborder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+        </iframe>         
+    </div>    
 </div>

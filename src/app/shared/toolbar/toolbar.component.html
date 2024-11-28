@@ -1,24 +1,27 @@
 <mat-toolbar>
-  <div class="logo-section" (click)="onHomeClick()">
+  <div class="logo-section" (click)="onButtonClick('home', '/home')">
     <span class="logo">
       <img src="../../assets/icon/logo2.png" alt="Logo"> <span class="app-name">SonikApp</span>
     </span>
   </div>
   <div class="icon-buttons">
-    <button mat-icon-button class="round-button" (click)="onMainClick()">
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'main'" (click)="onButtonClick('main', '/main')">
       Tus canciones
     </button>
-    <button mat-icon-button class="round-button" (click)="onPlaylistClick()">
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'playlist'" (click)="onButtonClick('playlist', '/playlist')">
       Tus playlist
     </button>
-    <button mat-icon-button class="round-button" (click)="onSearchClick()">
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'search'" (click)="onButtonClick('search', '/search')">
       Buscar Artistas
     </button>
-    <button mat-icon-button class="round-button" (click)="onSearchAlbumsClick()">
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'searchAlbums'" (click)="onButtonClick('searchAlbums', '/search/albums')">
       Buscar Álbumes
     </button>
-    <button mat-icon-button class="round-button" (click)="onSearchSongsClick()">
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'searchSongs'" (click)="onButtonClick('searchSongs', '/search/songs')">
       Buscar Canciones
+    </button>
+    <button class="btn btn-primary round-button" [class.active]="activeButton === 'guessGame'" (click)="onButtonClick('searchSongs', '/guessGame')">
+      Adivina la cancion
     </button>
   </div>
 </mat-toolbar>

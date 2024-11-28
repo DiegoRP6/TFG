@@ -1,57 +1,89 @@
 <div class="container">
+    <!-- Cargar la vista mientras se obtiene el artista -->
     <app-loading *ngIf="loadingArtist"></app-loading>
-    <div *ngIf="!loadingArtist" class="row animated fadeIn pt-5">
-        <div class="col-4">
-            <div class="artist-banner">
-                <img [src]="artista.images | noimage" class="artist-banner-image" alt="image">
-            </div>
-        </div>     
-        <div class="col-6 artist-info d-flex flex-column justify-content-start">
-            <h1>{{artista.name}}
-                <br>
-                <span class="follower-count">{{artista.followers.total | number}} seguidores    
-                    <br>         
-                    <!-- Botón condicional para seguir o dejar de seguir -->
-                    <button *ngIf="!following" class="btn btn-primary mt-2" (click)="seguirArtista(artista.id)">+ Seguir</button>
-                    <button *ngIf="following" class="btn btn-secondary mt-2" (click)="unfollowArtist(artista.id)">Siguiendo</button>
-                </span> 
-            </h1>
+
+    <!-- Botones para alternar entre HTML, iFrame y Atrás -->
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+            <button class="btn btn-info btn-lg rounded-pill mt-2" (click)="toggleView('html')">HTML</button>
         </div>
-        
-        <div class="col-2 align-self-start back-button">
-            <button routerLink="/search" class="btn btn-outline-danger">
+        <div class="col-auto">
+            <button class="btn btn-info btn-lg rounded-pill mt-2" (click)="toggleView('iframe')">iFrame</button>
+        </div>
+
+        <!-- Botón Atrás alineado a la derecha -->
+        <div class="col-auto ml-auto">
+            <button routerLink="/search" style="margin-left: 500px;" class="btn btn-danger btn-lg rounded-pill mt-2">
                 Atrás
             </button>
         </div>
     </div>
 
-    <div class="row mt-5" *ngIf="!loadingArtist">
-        <h1>Canciones más populares</h1>
-        <div class="col">
-            <table class="table table-borderless text-white align-middle">
-                <thead>
-                    <tr>
-                        <th>Foto</th>
-                        <th>Álbum</th>
-                        <th>Canción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let track of topTracks">
-                        <td><img [src]="track.album.images | noimage" class="img-thumb"></td>
-                        <td><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
-                        <td>
-                            <iframe [src]="track.id | domseguro" width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Contenido de la vista del artista -->
+    <div *ngIf="!loadingArtist" class="row animated fadeIn pt-5">
+        <!-- Vista HTML -->
+        <div *ngIf="viewType === 'html'" class="col-12">
+            <div class="row">
+                    <div class="col-4">
+                        <div class="artist-banner">
+                            <img [src]="artista.images | noimage" class="artist-banner-image" alt="image">
+                        </div>
+                    </div>     
+                    <div class="col-6 artist-info d-flex flex-column justify-content-start">
+                        <h1>{{artista.name}}
+                            <br>
+                            <span class="follower-count">{{artista.followers.total | number}} seguidores    
+                                <br>         
+                                <!-- Botón condicional para seguir o dejar de seguir -->
+                                <button *ngIf="!following" class="btn btn-primary mt-2" (click)="seguirArtista(artista.id)">+ Seguir</button>
+                                <button *ngIf="following" class="btn btn-secondary mt-2" (click)="unfollowArtist(artista.id)">Siguiendo</button>
+                            </span> 
+                        </h1>
+                    </div>
+                    
+                </div>
+            
+                <div class="row mt-5" *ngIf="!loadingArtist">
+                    <h1>Canciones más populares</h1>
+                    <div class="col">
+                        <table class="table table-borderless text-white align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Foto</th>
+                                    <th>Álbum</th>
+                                    <th>Canción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let track of topTracks">
+                                    <td><img [src]="track.album.images | noimage" class="img-thumb"></td>
+                                    <td><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
+                                    <td>
+                                        <iframe [src]="track.id | domseguro" width="800" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+
+        <!-- Vista iFrame -->
+        <div *ngIf="viewType === 'iframe'" class="col-12">
+            <iframe 
+            [src]="safeUrl" 
+            width="100%" 
+            height="660px"  
+            frameborder="0" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+            </iframe>         
         </div>
     </div>
 
+    <!-- Artistas relacionados -->
     <div class="row mt-5">
-        <h1>Artistas relacionados: </h1>
-        <br><br><br>
+        <h1>Artistas relacionados:</h1>
+        <app-artist-card [items]="artists"></app-artist-card>
     </div>
-    <app-artist-card [items]="artists"></app-artist-card>
 </div>

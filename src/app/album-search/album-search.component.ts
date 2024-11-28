@@ -14,6 +14,11 @@ export class AlbumSearchComponent {
   constructor(private spotify: SpotifyService) { }
 
   buscar(termino: string) {
+    if (!termino.trim()) {
+      this.albums = [];
+      return;
+    }
+
     this.loading = true;
     this.spotify.getAlbums(termino)
       .subscribe((data: any[]) => { 
@@ -25,5 +30,4 @@ export class AlbumSearchComponent {
         this.loading = false;
       });
   }
-  
 }

@@ -302,4 +302,17 @@ public poolURlS = {
     return this.getIsFollowingQuery<boolean[]>(`me/following/contains?type=artist&ids=${id}`);
   }
   
+  getRandomSong(): Observable<any> {
+    // Hacer una búsqueda aleatoria de canciones
+    const randomTerm = Math.random().toString(36) // Generar un término de búsqueda aleatorio
+    return this.getQuery(`search?q=${randomTerm}&type=track&limit=1&market=ES&genre=reggeaton`) // Buscar canciones utilizando el término aleatorio
+      .pipe(
+        map((data: any) => {
+          // Retornar el primer resultado de la búsqueda
+          return data.tracks.items[0];
+        })
+      );
+  }
+  
+
 }

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1; /* Ocupa todo el espacio restante */
+  flex: 1; 
 }
 
 .logo img {
@@ -24,20 +24,22 @@
 }
 
 .round-button {
-  margin: 0 5px;
-  padding: 8px 16px;
-  border-radius: 15px; 
-  background-color: lightseagreen; 
-  color: white; 
+  border-radius: 15px; /* Redondear bordes */
   font-weight: bold;
   text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 0.8em;
+  margin-right: 10px;
 }
 
 .round-button:hover {
   background-color: darkseagreen;
+}
+
+.active {
+  background-color: darkseagreen;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
 }
 
 .logo {

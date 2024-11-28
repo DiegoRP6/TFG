@@ -1,4 +1,16 @@
 input {
     height: 80px;
     background-color: black;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    border: 2px solid blue;  /* Borde azul permanente */
+    outline: none; /* Elimina el borde predeterminado de enfoque */
+}
+
+input:focus {
+    background-color: black;
+    color: white;
+    border: 2px solid blue; /* Asegura que el borde se mantenga azul al estar enfocado */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
 }

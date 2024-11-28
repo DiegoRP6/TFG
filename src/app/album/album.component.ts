@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyService } from '../Services/spotify.service';
 import { PreviousRouteService } from '../Services/previous-route.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-album',
@@ -12,14 +14,20 @@ export class AlbumComponent implements OnInit {
   album: any = {};
   tracks: any[] = [];
   loadingAlbum: boolean = true;
+  viewType: 'html' | 'iframe' = 'html';
+  safeUrl: SafeResourceUrl = ''; 
+
+
 
   constructor(
     private route: ActivatedRoute,
     private spotify: SpotifyService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
     const albumId = this.route.snapshot.paramMap.get('id');
+    const albumArtistId = this.route.snapshot.paramMap.get('artistId');
     if (albumId) {
       this.getAlbum(albumId);
       this.getAlbumTracks(albumId);
@@ -35,6 +43,7 @@ export class AlbumComponent implements OnInit {
         console.log(album);
         this.album = album;
         this.loadingAlbum = false;
+        this.setIframeUrl();
       }, error => {
         console.error('Error fetching album:', error);
         this.loadingAlbum = false; 
@@ -49,5 +58,13 @@ export class AlbumComponent implements OnInit {
       }, error => {
         console.error('Error fetching album tracks:', error);
       });
-  }  
+  } 
+  
+  toggleView(view: 'html' | 'iframe') {
+    this.viewType = view;
+  }
+
+  setIframeUrl() {
+    this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`https://open.spotify.com/embed/album/${this.album.id}?utm_source=generator`);
+  }
 }

@@ -1,0 +1,33 @@
+<app-toolbar></app-toolbar>
+
+<div class="game-container">
+  <h1>Adivina la canción</h1>
+
+  <!-- Pista de la canción: Reproducimos la canción desde Spotify mediante su URI -->
+  <iframe
+    [src]="songId | safeUrl"
+    width="800"
+    height="250"
+    frameborder="0"
+    allow="encrypted-media"
+    class="hidden-iframe">
+  </iframe>
+
+  <!-- Opciones para adivinar -->
+  <div class="options">
+    <button *ngFor="let option of options" (click)="checkAnswer(option)">
+      {{ option }}
+    </button>
+  </div>
+
+  <!-- Resultados -->
+  <div *ngIf="gameOver" class="result">
+    <p>¡Juego terminado! Puntaje: {{ score }}</p>
+    <button (click)="restartGame()">Reiniciar juego</button>
+  </div>
+
+  <!-- Mostrar puntaje en la parte inferior derecha -->
+  <div class="score">
+    <p>PUNTUACIÓN: {{ score }}</p>
+  </div>
+</div>

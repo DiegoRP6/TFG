@@ -10,6 +10,7 @@ import { SongSearchComponent } from './song-search/song-search.component';
 import { AlbumComponent } from './album/album.component';
 import { PlaylistPageComponent } from './playlist-page/playlist-page.component';
 import { PlaylistComponent } from './playlist/playlist.component';
+import { GuessGameComponent } from './components/guessGame/guess-game.component/guess-game.component.component';
 
 
 export const ROUTES: Routes = [
@@ -22,6 +23,7 @@ export const ROUTES: Routes = [
   { path: "artist/:id", component: ArtistaComponent, canActivate: [AuthGuardService]},
   { path: "album/:id", component: AlbumComponent, canActivate: [AuthGuardService]},
   { path: "playlist/:id", component: PlaylistComponent, canActivate: [AuthGuardService]},
+  { path: "guessGame", component: GuessGameComponent, canActivate: [AuthGuardService]},
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: '**', pathMatch: 'full', redirectTo: 'home'},
 ];

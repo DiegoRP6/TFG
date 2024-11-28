@@ -30,6 +30,8 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PlaylistFormComponent } from './playlist-form/playlist-form.component';
+import { GuessGameComponent } from './components/guessGame/guess-game.component/guess-game.component.component';
+import { SafeUrlPipe } from './pipes/safeUrl.pipe';
 
 @NgModule({
   declarations: [
@@ -47,11 +49,13 @@ import { PlaylistFormComponent } from './playlist-form/playlist-form.component';
     SongSearchComponent,
     NoimagePipe,
     DomseguroPipe,
+    SafeUrlPipe,
     ArtistaComponent,
     MainComponent,
     PlaylistFormComponent,
     ToolbarComponent,
-    ArtistaComponent
+    ArtistaComponent,
+    GuessGameComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { PlaylistFormComponent } from './playlist-form/playlist-form.component';
     MatIconModule,
     HttpClientModule,
     NgbModule,
-    RouterModule.forRoot(ROUTES, { useHash: true })
+    RouterModule.forRoot(ROUTES, { useHash: true }),
+    
   ],
   providers: [
     SpotifyService, 

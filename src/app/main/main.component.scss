@@ -1,7 +1,17 @@
+:host {
+  display: block;
+  background-image: url('../../assets/wallpapers/wallpaper6.jpg'); /* Cambia la ruta según corresponda */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%; /* Ocupa todo el alto de la pantalla */
+}
+
 .container {
   padding: 20px;
   border-radius: 10px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
 }
 
 .loading {
@@ -21,11 +31,12 @@ h2 {
 }
 
 .table-responsive {
+  width: 100%; /* Asegura que el contenedor de la tabla sea 100% */
   overflow-x: auto; 
 }
 
 .table {
-  width: 100%; 
+  width: 100%; /* Asegura que la tabla ocupe el 100% del ancho disponible */
   border-collapse: collapse;
 }
 
@@ -79,5 +90,10 @@ h2 {
 
 .zoomed {
   transform: scale(1.2); 
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(2); 
   transition: transform 0.3s ease;
 }

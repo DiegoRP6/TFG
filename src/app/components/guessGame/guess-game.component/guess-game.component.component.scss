@@ -1,0 +1,47 @@
+.game-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .song-preview {
+    margin: 20px 0;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 200%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: darkgreen;
+  }
+  
+  .result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .hidden-iframe {
+    clip-path: inset(68% 0 0 0); /* Recorta la mitad superior del iframe */
+  }
+
+  .score {
+    position: absolute;
+    bottom: 20px; /* Coloca la puntuación cerca de la parte inferior */
+    right: 20px; /* Coloca la puntuación a la derecha */
+    font-size: 3em; /* Tamaño grande de la puntuación */
+    font-weight: bold;
+    color: white; /* Color blanco para mejor visibilidad (puedes ajustarlo según el diseño) */
+  }

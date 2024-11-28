@@ -6,40 +6,40 @@ import { Router } from '@angular/router';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
 
-  activeIcon: string = '';
+  activeButton: string = '';
 
   constructor(private router: Router) {}
 
-  onHomeClick() {
-    this.activeIcon = 'home'
-    this.router.navigate(['/home']);
-    console.log('Music button clicked');
+  ngOnInit() {
+    // Usamos la ruta actual para determinar qué botón marcar como activo
+    this.router.events.subscribe(() => {
+      this.setActiveButton();
+    });
   }
 
-  onMainClick(){
-    this.router.navigate(['/main']);
-    console.log('Main button clicked');
+  setActiveButton() {
+    const currentRoute = this.router.url; // Obtiene la ruta actual
+    // Comparamos la ruta exacta con la ruta activa del botón
+    if (currentRoute === '/home') {
+      this.activeButton = 'home';
+    } else if (currentRoute === '/main') {
+      this.activeButton = 'main';
+    } else if (currentRoute === '/playlist') {
+      this.activeButton = 'playlist';
+    } else if (currentRoute === '/search') {
+      this.activeButton = 'search';
+    } else if (currentRoute === '/search/albums') {
+      this.activeButton = 'searchAlbums';
+    } else if (currentRoute === '/search/songs') {
+      this.activeButton = 'searchSongs';
+    }
   }
 
-  onPlaylistClick() {
-    this.router.navigate(['/playlist']);
-    console.log('Playlist button clicked');
-  }
 
-  onSearchClick() {
-    this.router.navigate(['/search']);
-    console.log('Search button clicked');
-  }
-
-  onSearchAlbumsClick() {
-    this.router.navigate(['/search/albums']);
-    console.log('Search Albums button clicked');
-  }
-
-  onSearchSongsClick() {
-    this.router.navigate(['/search/songs']);
-    console.log('Search Songs button clicked');
+  onButtonClick(button: string, route: string) {
+    this.activeButton = button;
+    this.router.navigate([route]);
   }
 }
