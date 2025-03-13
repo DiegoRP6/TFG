@@ -13,15 +13,13 @@ export class ToolbarComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // Usamos la ruta actual para determinar qué botón marcar como activo
     this.router.events.subscribe(() => {
       this.setActiveButton();
     });
   }
 
   setActiveButton() {
-    const currentRoute = this.router.url; // Obtiene la ruta actual
-    // Comparamos la ruta exacta con la ruta activa del botón
+    const currentRoute = this.router.url;
     if (currentRoute === '/home') {
       this.activeButton = 'home';
     } else if (currentRoute === '/main') {
@@ -34,6 +32,8 @@ export class ToolbarComponent implements OnInit {
       this.activeButton = 'searchAlbums';
     } else if (currentRoute === '/search/songs') {
       this.activeButton = 'searchSongs';
+    } else if (currentRoute === '/guessGame') {
+      this.activeButton = 'guessGame';
     }
   }
 

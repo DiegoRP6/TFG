@@ -63,6 +63,7 @@ export class ArtistaComponent implements OnInit {
       console.log("Data", data);
       this.artists = data.slice(0, 4);
     });
+    console.log("Artists", this.artists);
   }
   
   seguirArtista(id: string) {
